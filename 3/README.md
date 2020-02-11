@@ -28,7 +28,7 @@ WHILE some condition, maybe num itself is a prime? {
 		}
 		increment natural by ...
 
-
+```
 
 Found this algorithm at: https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
 

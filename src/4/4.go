@@ -5,7 +5,7 @@ package main
 
 import "fmt"
 
-var digits int = 3 // size of ints to multiply
+var digits int = 4 // size of ints to multiply
 
 func main() {
 	bigInt := 0
@@ -19,14 +19,14 @@ func main() {
 
 	//fmt.Println(int1, int2)
 
-	var number, remainder, temp int
+	var number, remainder, temp, final int
 	var reverse int = 0
 
 	//fmt.Print("Enter any positive integer : ")
 	//fmt.Scan(&number)
 
-	for i := bigInt; i > 900; i-- { //need better test condition
-		for j := bigInt; j > 900; j-- { //need better test condition
+	for i := bigInt; i > bigInt/10; i-- { //need better test condition
+		for j := bigInt; j > bigInt/10; j-- { //need better test condition
 			number = i * j
 			temp = number
 			reverse = 0
@@ -40,7 +40,7 @@ func main() {
 				number /= 10
 
 				if number == 0 {
-					fmt.Println("temp:", temp, "\treverse:", reverse)
+					//fmt.Println("temp:", temp, "\treverse:", reverse)
 					break // Break Statement used to exit from loop
 				}
 			}
@@ -49,11 +49,13 @@ func main() {
 			//fmt.Println("reverse:", reverse)
 
 			if temp == reverse {
-				fmt.Printf("%d is the largest Palindrome formed by multiplying two %d-digit numbers.\n", temp, digits)
+				if final < temp {
+					final = temp
+				}
 				break
-			} else {
-				//fmt.Printf("%d is not a Palindrome\n", temp)
 			}
 		}
 	}
+	fmt.Printf("%d is the largest Palindrome formed by multiplying two %d-digit numbers.\n", final, digits)
+
 }

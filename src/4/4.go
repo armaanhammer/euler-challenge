@@ -5,30 +5,55 @@ package main
 
 import "fmt"
 
+var digits int = 3 // size of ints to multiply
+
 func main() {
+	bigInt := 0
+
+	// create ints to multiply together
+	// populate with 9s to start at largest possible product
+	for i := 0; i < digits; i++ {
+		bigInt *= 10
+		bigInt += 9
+	}
+
+	//fmt.Println(int1, int2)
+
 	var number, remainder, temp int
 	var reverse int = 0
 
-	fmt.Print("Enter any positive integer : ")
-	fmt.Scan(&number)
+	//fmt.Print("Enter any positive integer : ")
+	//fmt.Scan(&number)
 
-	temp = number
+	for i := bigInt; i > 900; i-- { //need better test condition
+		for j := bigInt; j > 900; j-- { //need better test condition
+			number = i * j
+			temp = number
+			reverse = 0
 
-	// For Loop used in format of While Loop
-	for {
-		remainder = number % 10
-		reverse = reverse*10 + remainder
-		number /= 10
+			//fmt.Println("made into first loop") //debug
 
-		if number == 0 {
-			break // Break Statement used to exit from loop
+			for {
+				//fmt.Println("made into SECOND loop") //debug
+				remainder = number % 10
+				reverse = reverse*10 + remainder
+				number /= 10
+
+				if number == 0 {
+					fmt.Println("temp:", temp, "\treverse:", reverse)
+					break // Break Statement used to exit from loop
+				}
+			}
+
+			//fmt.Println("temp:", temp)
+			//fmt.Println("reverse:", reverse)
+
+			if temp == reverse {
+				fmt.Printf("%d is the largest Palindrome formed by multiplying two %d-digit numbers.\n", temp, digits)
+				break
+			} else {
+				//fmt.Printf("%d is not a Palindrome\n", temp)
+			}
 		}
 	}
-
-	if temp == reverse {
-		fmt.Printf("%d is a Palindrome", temp)
-	} else {
-		fmt.Printf("%d is not a Palindrome", temp)
-	}
-
 }

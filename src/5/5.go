@@ -12,9 +12,10 @@ func main() {
 	testCond := 0   // if all five conditions met, solution found
 	initVal := 2520 // since obviously will be larger than example number
 
-	testDivs := []int{7, 11, 13, 17, 19}
+	// there has got to be a better way to iterate through [2:19]
+	testDivs := []int{2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19}
 
-	for ; testCond < 5; initVal += 20 {
+	for ; testCond < len(testDivs); initVal += 20 {
 		testCond = 0 // reset
 
 		// iterate through all test divisors

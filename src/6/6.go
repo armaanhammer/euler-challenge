@@ -11,14 +11,25 @@ import (
 )
 
 func main() {
-	num := 10 // number of naturals to process
-	sumOfSquares := 0
-	squareOfSum := 0
+	num := 100.0 // number of naturals to process
+	sumOfSquares := 0.0
+	squareOfSum := 0.0
+	diff := 0.0
 
-	for i = 0; i < num; i++ {
-
+	for i := 1.0; i <= num; i++ {
+		sumOfSquares += math.Pow(i, 2)
+		squareOfSum += i
 	}
 
-	//fmt.Printf("%d is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20\n", initVal)
+	fmt.Println(sumOfSquares)
+	fmt.Println(squareOfSum)
+
+	squareOfSum = math.Pow(squareOfSum, 2)
+	fmt.Println(squareOfSum)
+
+	diff = squareOfSum - sumOfSquares
+
+	fmt.Printf("%f is the difference between the sum of the squares of the first %f natural numbers and the square of the sum.\n", diff, num)
+	//fmt.Printf("%d is the difference between the sum of the squares of the first %d natural numbers and the square of the sum.\n", diff, num)
 
 }

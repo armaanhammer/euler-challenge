@@ -21,3 +21,7 @@ Hence the difference between the sum of the squares of the first ten natural num
 ---
 
 This seems straightforward. The only problem I can think of so far is the possibilty of coding the solution in such a way that it takes inordinate processing time.
+
+## Next steps:
+
+I want to get more familiar with typecasting in GoLang. 

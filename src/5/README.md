@@ -14,4 +14,6 @@ Or, perhaps, increment number to test by 20, then test against 7, 11, 13, 17, an
 
 No, this didn't work for some reason, but iterating through the entire range [2:19] did.
 
-To make this faster, there's a concept I'm missing. Something like "greatest common product bounded by some ceiling". Not sure if that's actually a thing. For instance, if number divisible by 3, not necessarily divisible by 9. But, if number divisible by 18, then definitely divisible by 9, 6, 3 also.
+## Next Steps:
+
+To make this faster, there's a concept I'm missing. Something like "*greatest common product bounded by some ceiling*". Not sure if that's actually a thing. For instance, if number divisible by 3, not necessarily divisible by 9. But, if number divisible by 18, then definitely divisible by 9, 6, 3 also.

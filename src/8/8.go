@@ -7,20 +7,22 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"reflect"
+	"strconv"
 )
 
-calcProduct([]num int) int {
+func calcProduct(num []int) int {
 	i := 1
 	for _, j := range num {
 		i = i * j
 	}
+	//time.Sleep(500 * time.Millisecond) // debug
 	return i
 }
 
 func main() {
 	var num bytes.Buffer
-	digits := 13
+	var ints [1000]int
+	//digits := 13
 	product := 0
 	finalProduct := 0
 
@@ -54,15 +56,21 @@ func main() {
 
 	// convert uint8 value to int value
 	// key and value pair
-	for k, v := range raw {
+	for k, _ := range raw {
 		//fmt.Println(k, v)
-		raw[k] = raw[k] - 48
+		//raw[k] = raw[k] - 48
+		ints[k], _ = strconv.Atoi(string(raw[k]))
 	}
 
 	fmt.Println("Test", raw)
+	fmt.Println("Test", ints)
 
-	for k := range raw {
-		raw[k:k+13]
+	for k := range ints {
+		product = calcProduct(ints[k : k+13])
+		if product > finalProduct {
+			finalProduct = product
+		}
+		fmt.Println("num:", k, " product: ", product, " final: ", finalProduct)
 	}
 
 }

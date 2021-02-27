@@ -72,27 +72,36 @@ func arrayFromFile(fileName string) [][]int {
 	return mainArray
 }
 
-func goRight(mainArray [][]int, num int) int {
+func goRight(mainArray [][]int, i int, j int, num int) int {
 	product := 1 // multiplication identity
-
+	for offset := 0; offset < num; offset++ {
+		product = product * mainArray[i+offset][j]
+	}
 	return product
 }
 
-func goDown(mainArray [][]int, num int) int {
+func goDown(mainArray [][]int, i int, j int, num int) int {
 	product := 1 // multiplication identity
-
+	for offset := 0; offset < num; offset++ {
+		product = product * mainArray[i][j+offset]
+	}
 	return product
 }
 
-func goDiagDown(mainArray [][]int, num int) int {
+func goDiagDown(mainArray [][]int, i int, j int, num int) int {
 	product := 1 // multiplication identity
-
+	for offset := 0; offset < num; offset++ {
+		product = product * mainArray[i+offset][j+offset]
+	}
 	return product
 }
 
-func goDiagUp(mainArray [][]int, num int) int {
+func goDiagUp(mainArray [][]int, i int, j int, num int) int {
 	product := 1 // multiplication identity
-
+	for offset := 0; offset < num; offset++ {
+		product = product * mainArray[i-(offset+1)][j+offset]
+		println("i", i, "j", j, "offset", offset, product)
+	}
 	return product
 }
 
@@ -111,33 +120,35 @@ func main() {
 	temp := 0
 	num := 4 // number of digits to multiply
 	var mainArray = arrayFromFile("data.txt")
-	fmt.Println(mainArray)
+	//fmt.Println(mainArray)
 
 	// cycle through all avaliable numbers
 	for i := 0; i <= len(mainArray)-num; i++ {
 		for j := 0; j <= len(mainArray[i])-4; j++ {
-			fmt.Printf("%d ", mainArray[i][j]) // debug
+			//fmt.Printf("%d ", mainArray[i][j]) // debug
 
 			//test all four operations
-			temp = goRight(mainArray, num)
+			temp = goRight(mainArray, i, j, num)
 			if temp > product {
 				product = temp
 			}
-			temp = goDown(mainArray, num)
+			temp = goDown(mainArray, i, j, num)
 			if temp > product {
 				product = temp
 			}
-			temp = goDiagDown(mainArray, num)
+			temp = goDiagDown(mainArray, i, j, num)
 			if temp > product {
 				product = temp
 			}
-			temp = goDiagUp(mainArray, num)
+			// note the diffent starting position for this one
+			temp = goDiagUp(mainArray, i+num, j, num)
 			if temp > product {
 				product = temp
 			}
-
 		}
 	}
+
+	fmt.Printf("%d is the largest product of %d numbers in the grid.\n", product, num)
 
 	return
 }

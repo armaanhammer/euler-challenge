@@ -1,15 +1,34 @@
 // Program for finding the greatest product of four adjacent numbers in the same
 // direction (up, down, left, right, or diagonally) in a 20×20 grid.
 //
+// Some portions copied from https://gobyexample.com/reading-files
+//
 // Armaan Roshani
 
 package main
 
 import (
+	"bufio"
+	"flag"
 	"fmt"
+	"log"
+	"os"
+	"strconv"
+	"strings"
 )
 
-func isPrime(toTest int) bool {
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+	return
+}
+
+/* func readFile() [][]int {
+	return
+} */
+
+/* func isPrime(toTest int) bool {
 	// 1 is not prime
 	if toTest == 1 {
 		return false
@@ -28,21 +47,81 @@ func isPrime(toTest int) bool {
 
 	// if the above loop found no factors, then number to test is prime
 	return true
-}
+} */
 
 func main() {
-	num := 2000000 // max number to increment up to
-	sum := 2       // accounts for 2 being prime
 
-	// i tracks current number under test
-	for i := 3; i <= num; i = i + 2 {
-		if isPrime(i) {
-			sum = sum + i
-			//fmt.Printf("%d is the %dth prime number.\n", prime, j) // debug
-		} else {
-			//fmt.Printf("%d is NOT the %dth prime number.\n", prime, j) // debug
+	/* 	dat, err := ioutil.ReadFile("data.txt")
+	   	check(err)
+	   	fmt.Print(string(dat)) */
+
+	/* 	f, err := os.Open("data.txt")
+	check(err) */
+
+	//tempString := "01 02 03 04 05 06 07 08 09 10"
+	var mainArray [][]int
+	var tempArray []int
+	var tempString string
+
+	fptr := flag.String(".", "data.txt", "file path to read from")
+	flag.Parse()
+
+	f, err := os.Open(*fptr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func() {
+		if err = f.Close(); err != nil {
+			log.Fatal(err)
 		}
+	}()
+	outerScanner := bufio.NewScanner(f)
+
+	//i := 0
+	count := 0
+	for outerScanner.Scan() {
+
+		fmt.Println(outerScanner.Text()) // debug
+		tempString = outerScanner.Text()
+		//fmt.Println(tempString)
+
+		innerScanner := bufio.NewScanner(strings.NewReader(tempString))
+		// Set the split function for the scanning operation.
+		innerScanner.Split(bufio.ScanWords)
+
+		// Count the words.
+
+		temp := 0
+		for innerScanner.Scan() {
+			temp, _ = strconv.Atoi(innerScanner.Text())
+			tempArray = append(tempArray, temp)
+
+			//fmt.Println("Cycle", count) // debug
+			//fmt.Println(tempArray) // debug
+
+			//time.Sleep(500 * time.Millisecond) // debug
+
+			count++
+		}
+
+		if err := innerScanner.Err(); err != nil {
+			fmt.Fprintln(os.Stderr, "reading input:", err)
+		}
+
+		mainArray = append(mainArray, tempArray)
+		//fmt.Println(mainArray) // debug
+		tempArray = nil
+	}
+	err = outerScanner.Err()
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	fmt.Printf("%d is the sum of all the primes below %d.\n", sum, num)
+	//mainArray = append(mainArray, tempArray)
+
+	fmt.Printf("%d\n", count)
+	fmt.Println(tempArray)
+	fmt.Println(mainArray)
+
+	return
 }

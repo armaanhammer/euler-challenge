@@ -17,3 +17,9 @@
 # vim swap files
 *.swp
 *.swo
+
+# Mac-specific
+.DS_Store
+
+# VS Code
+.vscode*

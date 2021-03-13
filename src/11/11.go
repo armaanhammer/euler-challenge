@@ -124,7 +124,7 @@ func main() {
 
 	// cycle through all avaliable numbers
 	for i := 0; i <= len(mainArray)-num; i++ {
-		for j := 0; j <= len(mainArray[i])-4; j++ {
+		for j := 0; j <= len(mainArray[i])-num; j++ {
 			//fmt.Printf("%d ", mainArray[i][j]) // debug
 
 			//test all four operations
